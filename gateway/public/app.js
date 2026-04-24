@@ -14,7 +14,8 @@ let predictedPoints = null;
 
 async function loadTasks() {
   const response = await fetch("/api/tasks");
-  const tasks = await response.json();
+  const data = await response.json();
+  const tasks = Array.isArray(data) ? data : (data.tasks ?? []);
 
   tasksList.innerHTML = "";
 
