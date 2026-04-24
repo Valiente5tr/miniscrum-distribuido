@@ -23,9 +23,15 @@ services:
       DB_PASSWORD: root
     depends_on:
       - mysql
+    networks:
+      - default
+      - dokploy-network
 
   python-ml:
     build: ./python-ml
+    networks:
+      - default
+      - dokploy-network
 
   mysql:
     image: mysql:8.0
@@ -36,6 +42,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - default
+      - dokploy-network
 
 volumes:
   mysql_data:
